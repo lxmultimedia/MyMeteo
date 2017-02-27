@@ -1,0 +1,22 @@
+<resources>
+
+    <!-- GENERAL -->
+    <string name="app_name">MyMeteo</string>
+    <string name="app_subtitle">FFHS - ESA - 2017</string>
+
+    <string name="navigation_drawer_open">Menu zeigen</string>
+    <string name="navigation_drawer_close">Menu ausblenden</string>
+
+    <string name="action_settings">Einstellungen</string>
+
+
+    <!-- SIDEBAR -->
+    <string name="menu_home">Home</string>
+    <string name="menu_suche">Suche</string>
+    <string name="menu_favoriten">Favoriten</string>
+    <string name="menu_topplaces">Top Orte</string>
+    <string name="menu_einstellungen">Einstellungen</string>
+    <string name="menu_hilfe">Hilfe</string>
+    <string name="menu_about">About</string>
+
+</resources>
