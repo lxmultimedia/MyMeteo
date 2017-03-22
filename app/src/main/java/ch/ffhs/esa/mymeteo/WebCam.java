@@ -6,10 +6,10 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.TextView;
 import com.loopj.android.http.*;
 import org.json.JSONException;
 import org.json.JSONObject;
+import android.webkit.*;
 
 public class WebCam extends AppCompatActivity {
 
@@ -40,8 +40,9 @@ public class WebCam extends AppCompatActivity {
 
             @Override
             public void onStart() {
-                TextView _response = (TextView) findViewById(R.id.txtResponse);
-                _response.setText("started");
+                //TextView _response = (TextView) findViewById(R.id.txtResponse);
+                //_response.setText("started");
+                System.out.println("WebCam Request started");
             }
 
             @Override
@@ -52,8 +53,29 @@ public class WebCam extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                TextView _response = (TextView) findViewById(R.id.txtResponse);
-                _response.setText(jsonObject.toString());
+                //TextView _response = (TextView) findViewById(R.id.txtResponse);
+                //_response.setText(jsonObject.toString());
+
+                String webcamurl = "";
+                try {
+                    webcamurl = jsonObject.getJSONObject("result").getJSONArray("webcams").getJSONObject(0).
+                            getJSONObject("url").getJSONObject("current").getString("mobile");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                //_response.setText(webcamurl);
+                System.out.println("WebCam Request successful");
+
+
+                WebView webview = (WebView) findViewById(R.id.webcambrowser);
+                webview.setInitialScale(1);
+                webview.getSettings().setJavaScriptEnabled(true);
+                webview.getSettings().setLoadWithOverviewMode(true);
+                webview.getSettings().setUseWideViewPort(true);
+                webview.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+                webview.setScrollbarFadingEnabled(false);
+                webview.loadUrl(webcamurl);
             }
 
             @Override
@@ -61,17 +83,19 @@ public class WebCam extends AppCompatActivity {
                 JSONObject jsonObject = null;
                 try {
                     jsonObject = new JSONObject(new String(errorResponse));
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                } catch (JSONException ex) {
+                    ex.printStackTrace();
                 }
-                TextView _response = (TextView) findViewById(R.id.txtResponse);
-                _response.setText(jsonObject.toString());
+                //TextView _response = (TextView) findViewById(R.id.txtResponse);
+                //_response.setText(jsonObject.toString());
+                System.out.println("WebCam Request failed");
             }
 
             @Override
             public void onRetry(int retryNo) {
-                TextView _response = (TextView) findViewById(R.id.txtResponse);
+                //TextView _response = (TextView) findViewById(R.id.txtResponse);
                 //_response.setText(retryNo);
+                System.out.println("WebCam Request retry");
             }
         });
     }

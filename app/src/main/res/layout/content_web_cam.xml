@@ -8,11 +8,21 @@
     tools:context="ch.ffhs.esa.mymeteo.WebCam"
     tools:showIn="@layout/activity_web_cam">
 
-    <TextView
-        android:id="@+id/txtResponse"
-        android:layout_width="386dp"
-        android:layout_height="283dp"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+    <WebView
+        android:id="@+id/webcambrowser"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_margin="0dp"
+        android:clipToPadding="true"
+        android:fadeScrollbars="true"
+        android:isScrollContainer="true"
+        android:keepScreenOn="true"
+        android:layoutDirection="inherit"
+        android:layoutMode="opticalBounds"
+        android:padding="0dp"
+        android:visibility="visible"
+        app:layout_constraintRight_toRightOf="parent" >
+
+    </WebView>
+
 </android.support.constraint.ConstraintLayout>
