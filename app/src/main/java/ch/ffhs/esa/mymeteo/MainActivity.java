@@ -8,6 +8,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Criteria;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -19,6 +20,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -35,6 +37,7 @@ import android.location.LocationManager;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.identity.intents.Address;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.*;
@@ -46,6 +49,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import android.content.pm.PackageManager;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
@@ -56,6 +63,9 @@ public class MainActivity extends AppCompatActivity
     GoogleMap mGoogleMap;
     SupportMapFragment mFragment;
     Marker currLocationMarker;
+
+    float testLat = 47;
+    float testLon = 8.5f;
 
 
     @Override
@@ -328,12 +338,63 @@ public class MainActivity extends AppCompatActivity
         Toast.makeText(this, "Location Changed", Toast.LENGTH_SHORT).show();
 
         //zoom to current position:
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 11));
+        //mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 1));
 
         //If you only need one location, unregister the listener
         //LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
 
     }
+
+    // Adds a marker to the map.
+    public void addMarker(View v) {
+
+        testLat += 0.1;
+        testLon += 0.2;
+
+        Marker newMarker;
+        LatLng newLatLng = new LatLng(testLat, testLon);
+
+        // Add the marker at the clicked location, and add the next-available label
+        // from the array of alphabetical characters.
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(newLatLng);
+        markerOptions.title("New Marker, Test");
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+        newMarker = mGoogleMap.addMarker(markerOptions);
+        //mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newLatLng, 11));
+    }
+
+
+    public void getAddress(View v) {
+
+        getPosition();
+
+        Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+
+        try {
+            List<android.location.Address> addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+            android.location.Address obj = addresses.get(0);
+            String add = obj.getAddressLine(0);
+            add = add + "\n" + obj.getCountryName();
+            add = add + "\n" + obj.getCountryCode();
+            add = add + "\n" + obj.getAdminArea();
+            add = add + "\n" + obj.getPostalCode();
+            add = add + "\n" + obj.getSubAdminArea();
+            add = add + "\n" + obj.getLocality();
+            add = add + "\n" + obj.getSubThoroughfare();
+
+            Log.v("IGA", "Address" + add);
+            Toast.makeText(this, "Address=>" + add,
+            Toast.LENGTH_SHORT).show();
+
+            // TennisAppActivity.showDialog(add);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
