@@ -23,8 +23,7 @@
 
     <include
         android:id="@+id/include"
-        layout="@layout/content_main"
-        android:layout_height="307dp" />
+        layout="@layout/content_main" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -32,19 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top|right"
         android:layout_margin="@dimen/fab_margin"
-        app:backgroundTint="@color/cast_expanded_controller_ad_label_background_color"
         app:layout_anchor="@+id/include"
         app:layout_anchorGravity="bottom|left"
         app:srcCompat="@android:drawable/ic_dialog_email" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:onClick="getAddress"
-        android:text="Get Location Info, Test"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="center_vertical|center_horizontal" />
 
 </android.support.design.widget.CoordinatorLayout>

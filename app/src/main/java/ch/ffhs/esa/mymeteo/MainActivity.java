@@ -5,6 +5,7 @@ import android.Manifest.*;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Criteria;
@@ -47,14 +48,20 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.content.pm.PackageManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import data.Channel;
+import data.Item;
+import service.WeatherServiceCallback;
+import service.YahooWeatherService;
+
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, WeatherServiceCallback {
 
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
@@ -66,6 +73,9 @@ public class MainActivity extends AppCompatActivity
 
     float testLat = 47;
     float testLon = 8.5f;
+
+    private YahooWeatherService service;
+    private ProgressDialog dialog;
 
 
     @Override
@@ -134,6 +144,10 @@ public class MainActivity extends AppCompatActivity
 
         mFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mFragment.getMapAsync(this);
+
+        getLocation();
+
+
     }
 
     @Override
@@ -308,6 +322,7 @@ public class MainActivity extends AppCompatActivity
         //mLocationRequest.setSmallestDisplacement(0.1F); //1/10 meter
 
         LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, (com.google.android.gms.location.LocationListener) this);
+
     }
 
     @Override
@@ -362,13 +377,15 @@ public class MainActivity extends AppCompatActivity
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
         newMarker = mGoogleMap.addMarker(markerOptions);
         //mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newLatLng, 11));
+
     }
 
 
-    public void getAddress(View v) {
+    public void getLocation() {
 
         getPosition();
 
+        String localityCountry = "";
         Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
 
         try {
@@ -383,16 +400,32 @@ public class MainActivity extends AppCompatActivity
             add = add + "\n" + obj.getLocality();
             add = add + "\n" + obj.getSubThoroughfare();
 
-            Log.v("IGA", "Address" + add);
-            Toast.makeText(this, "Address=>" + add,
-            Toast.LENGTH_SHORT).show();
+            String locality = obj.getLocality();
+            String countryCode = obj.getCountryCode();
+            localityCountry = locality + "," + countryCode;
 
-            // TennisAppActivity.showDialog(add);
+            TextView tvLocation = (TextView) findViewById(R.id.PositionWert);
+            tvLocation.setText(localityCountry);
+
+            Log.v("IGA", "Address" + add);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
+
+        getWeatherForecast(localityCountry);
+
+    }
+
+    private void getWeatherForecast(String localityCountry) {
+        dialog = new ProgressDialog(this);
+        service = new YahooWeatherService(this);
+
+        dialog.setMessage("Laden...");
+        dialog.show();
+
+        service.refreshWeather(localityCountry);
+
     }
 
 
@@ -411,4 +444,30 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+
+    @Override
+    public void serviceSuccess(Channel channel) {
+        dialog.hide();
+
+        Item item = channel.getItem();
+
+        String location = service.getLocation();
+        String temperature = item.getCondition().getTemperature() + " " + "°" + channel.getUnits().getTemperature();
+        String condition = item.getCondition().getDescription();
+
+        String output = location + "\n" +
+                temperature + "\n" +
+                condition;
+
+        Toast.makeText(this, output, Toast.LENGTH_LONG).show();
+
+
+
+    }
+
+    @Override
+    public void serviceFailure(Exception exception) {
+        dialog.hide();
+        Toast.makeText(this, "error", Toast.LENGTH_LONG).show();
+    }
 }
