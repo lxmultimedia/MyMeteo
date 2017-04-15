@@ -25,10 +25,6 @@ public class ForeCastContent {
         ITEM_MAP.put(item.id, item);
     }
 
-    private static ForeCastItem createDummyItem(int position) {
-        return new ForeCastItem(String.valueOf(position), "Item " + position, makeDetails(position));
-    }
-
     private static String makeDetails(int position) {
         StringBuilder builder = new StringBuilder();
         builder.append("Details about Item: ").append(position);
@@ -36,6 +32,11 @@ public class ForeCastContent {
             builder.append("\nMore label information here.");
         }
         return builder.toString();
+    }
+
+    public static void clear() {
+        ForeCastContent.ITEM_MAP.clear();
+        ForeCastContent.ITEMS.clear();
     }
 
     /**

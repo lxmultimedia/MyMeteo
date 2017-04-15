@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import ch.ffhs.esa.mymeteo.listContent.ForeCastContent;
 import ch.ffhs.esa.mymeteo.listContent.ForeCastContent.ForeCastItem;
@@ -19,7 +20,7 @@ import ch.ffhs.esa.mymeteo.listContent.ForeCastContent.ForeCastItem;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class ListFragment extends Fragment {
+public class ForeCastListFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -31,13 +32,13 @@ public class ListFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public ListFragment() {
+    public ForeCastListFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static ListFragment newInstance(int columnCount) {
-        ListFragment fragment = new ListFragment();
+    public static ForeCastListFragment newInstance(int columnCount) {
+        ForeCastListFragment fragment = new ForeCastListFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -68,6 +69,7 @@ public class ListFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
+            recyclerView.removeAllViewsInLayout();
             recyclerView.setAdapter(new MyforecastDayRecyclerViewAdapter(ForeCastContent.ITEMS, mListener));
 
 

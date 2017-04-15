@@ -51,7 +51,7 @@
 
     <fragment
         android:id="@+id/listForeCast"
-        android:name="ch.ffhs.esa.mymeteo.ListFragment"
+        android:name="ch.ffhs.esa.mymeteo.ForeCastListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"

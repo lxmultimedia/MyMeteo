@@ -9,5 +9,5 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context="ch.ffhs.esa.mymeteo.ListFragment"
+    tools:context="ch.ffhs.esa.mymeteo.ForeCastListFragment"
     tools:listitem="@layout/fragment_forecastday" />

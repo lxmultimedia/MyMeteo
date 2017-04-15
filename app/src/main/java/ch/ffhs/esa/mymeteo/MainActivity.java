@@ -59,7 +59,7 @@ import service.YahooWeatherService;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener, LocationListener, WeatherServiceCallback, ListFragment.OnListFragmentInteractionListener {
+        GoogleApiClient.OnConnectionFailedListener, LocationListener, WeatherServiceCallback, ForeCastListFragment.OnListFragmentInteractionListener {
 
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
@@ -467,69 +467,81 @@ public class MainActivity extends AppCompatActivity
         Day day8 = forecast.getDay8();
         Day day9 = forecast.getDay9();
 
+        String iconbase = "http://l.yimg.com/a/i/us/we/52/";
 
         // Day 0
         String temperature0 = "- " + day0.getTempLow() + ", + " + day0.getTempHigh();
         String text0 = day0.getText();
+        String icon0 = iconbase + day0.getCode() + ".gif";
         String forecast0 = temperature0 + ", " + text0;
 
         // Day 1
         String temperature1 = "- " + day1.getTempLow() + ", + " + day1.getTempHigh();
         String text1 = day1.getText();
+        String icon1 = iconbase + day1.getCode() + ".gif";
         String forecast1 = temperature1 + ", " + text1;
 
         // Day 2
         String temperature2 = "- " + day2.getTempLow() + ", + " + day2.getTempHigh();
         String text2 = day2.getText();
+        String icon2 = iconbase + day2.getCode() + ".gif";
         String forecast2 = temperature2 + ", " + text2;
 
         // Day 3
         String temperature3 = "- " + day3.getTempLow() + ", + " + day3.getTempHigh();
         String text3 = day3.getText();
+        String icon3 = iconbase + day3.getCode() + ".gif";
         String forecast3 = temperature3 + ", " + text3;
 
         // Day 4
         String temperature4 = "- " + day4.getTempLow() + ", + " + day4.getTempHigh();
         String text4 = day4.getText();
+        String icon4 = iconbase + day4.getCode() + ".gif";
         String forecast4 = temperature4 + ", " + text4;
 
         // Day 5
         String temperature5 = "- " + day5.getTempLow() + ", + " + day5.getTempHigh();
         String text5 = day5.getText();
+        String icon5 = iconbase + day5.getCode() + ".gif";
         String forecast5 = temperature5 + ", " + text5;
 
         // Day 6
         String temperature6 = "- " + day6.getTempLow() + ", + " + day6.getTempHigh();
         String text6 = day6.getText();
+        String icon6 = iconbase + day6.getCode() + ".gif";
         String forecast6 = temperature6 + ", " + text6;
 
         // Day 7
         String temperature7 = "- " + day7.getTempLow() + ", + " + day7.getTempHigh();
         String text7= day7.getText();
+        String icon7 = iconbase + day7.getCode() + ".gif";
         String forecast7 = temperature7 + ", " + text7;
 
         // Day 8
         String temperature8 = "- " + day8.getTempLow() + ", + " + day8.getTempHigh();
         String text8 = day8.getText();
+        String icon8 = iconbase + day8.getCode() + ".gif";
         String forecast8 = temperature8 + ", " + text8;
 
         // Day 9
         String temperature9 = "- " + day9.getTempLow() + ", + " + day9.getTempHigh();
         String text9 = day9.getText();
+        String icon9 = iconbase + day9.getCode() + ".gif";
         String forecast9 = temperature9 + ", " + text9;
 
 
+        ForeCastContent.clear();
 
-        ForeCastContent.addItem(new ForeCastContent.ForeCastItem("0","0",forecast0));
-        ForeCastContent.addItem(new ForeCastContent.ForeCastItem("1","1",forecast1));
-        ForeCastContent.addItem(new ForeCastContent.ForeCastItem("2","2",forecast2));
-        ForeCastContent.addItem(new ForeCastContent.ForeCastItem("3","3",forecast3));
-        ForeCastContent.addItem(new ForeCastContent.ForeCastItem("4","4",forecast4));
-        ForeCastContent.addItem(new ForeCastContent.ForeCastItem("5","5",forecast5));
-        ForeCastContent.addItem(new ForeCastContent.ForeCastItem("6","6",forecast6));
-        ForeCastContent.addItem(new ForeCastContent.ForeCastItem("7","7",forecast7));
-        ForeCastContent.addItem(new ForeCastContent.ForeCastItem("8","8",forecast8));
-        ForeCastContent.addItem(new ForeCastContent.ForeCastItem("9","9",forecast9));
+        ForeCastContent.addItem(new ForeCastContent.ForeCastItem("0",icon0,forecast0));
+        ForeCastContent.addItem(new ForeCastContent.ForeCastItem("1",icon1,forecast1));
+        ForeCastContent.addItem(new ForeCastContent.ForeCastItem("2",icon2,forecast2));
+        ForeCastContent.addItem(new ForeCastContent.ForeCastItem("3",icon3,forecast3));
+        ForeCastContent.addItem(new ForeCastContent.ForeCastItem("4",icon4,forecast4));
+        ForeCastContent.addItem(new ForeCastContent.ForeCastItem("5",icon5,forecast5));
+        ForeCastContent.addItem(new ForeCastContent.ForeCastItem("6",icon6,forecast6));
+        ForeCastContent.addItem(new ForeCastContent.ForeCastItem("7",icon7,forecast7));
+        ForeCastContent.addItem(new ForeCastContent.ForeCastItem("8",icon8,forecast8));
+        ForeCastContent.addItem(new ForeCastContent.ForeCastItem("9",icon9,forecast9));
 
         RecyclerView rv = (RecyclerView) findViewById(R.id.listForeCast);
         rv.setAdapter(new MyforecastDayRecyclerViewAdapter(ForeCastContent.ITEMS,null));

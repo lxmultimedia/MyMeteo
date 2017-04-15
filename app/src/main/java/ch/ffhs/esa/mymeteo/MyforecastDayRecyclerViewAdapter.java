@@ -4,9 +4,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import ch.ffhs.esa.mymeteo.ListFragment.OnListFragmentInteractionListener;
+import ch.ffhs.esa.mymeteo.ForeCastListFragment.OnListFragmentInteractionListener;
+import ch.ffhs.esa.mymeteo.listContent.DownloadImageTask;
 import ch.ffhs.esa.mymeteo.listContent.ForeCastContent.ForeCastItem;
 
 import java.util.List;
@@ -36,7 +38,8 @@ public class MyforecastDayRecyclerViewAdapter extends RecyclerView.Adapter<Myfor
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
+        new DownloadImageTask(holder.mIdView).execute(mValues.get(position).icon);
+
         holder.mContentView.setText(mValues.get(position).label);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -58,14 +61,14 @@ public class MyforecastDayRecyclerViewAdapter extends RecyclerView.Adapter<Myfor
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
+        public final ImageView mIdView;
         public final TextView mContentView;
         public ForeCastItem mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.listForeCastLabel);
+            mIdView = (ImageView) view.findViewById(R.id.listForeCastIcon);
             mContentView = (TextView) view.findViewById(R.id.listForeCastLabel);
         }
 
