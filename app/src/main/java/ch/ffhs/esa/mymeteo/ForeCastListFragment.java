@@ -9,10 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import ch.ffhs.esa.mymeteo.listContent.ForeCastContent;
 import ch.ffhs.esa.mymeteo.listContent.ForeCastContent.ForeCastItem;
+import ch.ffhs.esa.mymeteo.listContent.MyforecastDayRecyclerViewAdapter;
 
 /**
  * A fragment representing a list of Items.

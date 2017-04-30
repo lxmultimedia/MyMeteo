@@ -23,7 +23,7 @@ import ch.ffhs.esa.mymeteo.imagecrawler.ImageAdapter;
 import ch.ffhs.esa.mymeteo.imagecrawler.ImageResult;
 
 
-public class ImageCrawler extends AppCompatActivity {
+public class ImageCrawlerActivity extends AppCompatActivity {
 
     public final int MAX_RESULT_COUNT = 10;
     private final int PAGE_SIZE = 8;
@@ -141,9 +141,9 @@ public class ImageCrawler extends AppCompatActivity {
 
 class SearchTask extends AsyncTask<String, Void, Void> {
 
-    private ImageCrawler context;
+    private ImageCrawlerActivity context;
 
-    public SearchTask(ImageCrawler context) {
+    public SearchTask(ImageCrawlerActivity context) {
         this.context = context;
     }
 

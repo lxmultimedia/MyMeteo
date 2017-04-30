@@ -51,7 +51,7 @@
             android:label="@string/title_activity_web_cam"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ImageCrawler"></activity>
+        <activity android:name=".ImageCrawlerActivity"></activity>
     </application>
 
 </manifest>

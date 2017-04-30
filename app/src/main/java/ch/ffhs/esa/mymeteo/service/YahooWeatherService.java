@@ -1,4 +1,4 @@
-package service;
+package ch.ffhs.esa.mymeteo.service;
 
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -7,13 +7,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URLConnection;
 import java.net.URL;
-import data.Channel;
+import ch.ffhs.esa.mymeteo.data.Channel;
 
 /**
  * Created by dev_z on 09.04.2017.

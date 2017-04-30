@@ -1,4 +1,4 @@
-package data;
+package ch.ffhs.esa.mymeteo.data;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

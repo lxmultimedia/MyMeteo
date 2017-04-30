@@ -1,4 +1,4 @@
-package ch.ffhs.esa.mymeteo;
+package ch.ffhs.esa.mymeteo.listContent;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,16 +7,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import ch.ffhs.esa.mymeteo.ForeCastListFragment.OnListFragmentInteractionListener;
-import ch.ffhs.esa.mymeteo.listContent.DownloadImageTask;
-import ch.ffhs.esa.mymeteo.listContent.ForeCastContent.ForeCastItem;
-
 import java.util.List;
+
+import ch.ffhs.esa.mymeteo.ForeCastListFragment.OnListFragmentInteractionListener;
+import ch.ffhs.esa.mymeteo.R;
+import ch.ffhs.esa.mymeteo.listContent.ForeCastContent.ForeCastItem;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link ForeCastItem} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
+ * TODO: Replace the implementation with code for your ch.ffhs.esa.mymeteo.data type.
  */
 public class MyforecastDayRecyclerViewAdapter extends RecyclerView.Adapter<MyforecastDayRecyclerViewAdapter.ViewHolder> {
 

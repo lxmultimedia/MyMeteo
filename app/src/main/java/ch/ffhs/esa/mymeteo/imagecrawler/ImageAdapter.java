@@ -8,14 +8,14 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
-import ch.ffhs.esa.mymeteo.ImageCrawler;
+import ch.ffhs.esa.mymeteo.ImageCrawlerActivity;
 
 public class ImageAdapter extends BaseAdapter {
 
-    private ImageCrawler context;
+    private ImageCrawlerActivity context;
     private SimpleArrayMap<Integer, String> results;
 
-    public ImageAdapter(ImageCrawler context) {
+    public ImageAdapter(ImageCrawlerActivity context) {
         this.results = new SimpleArrayMap<Integer, String>();
         this.context = context;
     }

@@ -1,6 +1,6 @@
-package service;
+package ch.ffhs.esa.mymeteo.service;
 
-import data.Channel;
+import ch.ffhs.esa.mymeteo.data.Channel;
 
 /**
  * Created by dev_z on 09.04.2017.

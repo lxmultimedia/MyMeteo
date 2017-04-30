@@ -50,12 +50,13 @@ import java.util.List;
 import java.util.Locale;
 
 import ch.ffhs.esa.mymeteo.listContent.ForeCastContent;
-import data.Channel;
-import data.Day;
-import data.ForeCast;
-import data.Item;
-import service.WeatherServiceCallback;
-import service.YahooWeatherService;
+import ch.ffhs.esa.mymeteo.data.Channel;
+import ch.ffhs.esa.mymeteo.data.Day;
+import ch.ffhs.esa.mymeteo.data.ForeCast;
+import ch.ffhs.esa.mymeteo.data.Item;
+import ch.ffhs.esa.mymeteo.listContent.MyforecastDayRecyclerViewAdapter;
+import ch.ffhs.esa.mymeteo.service.WeatherServiceCallback;
+import ch.ffhs.esa.mymeteo.service.YahooWeatherService;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
@@ -198,7 +199,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_einstellungen) {
 
         } else if (id == R.id.nav_hilfe) {
-            Intent intent = new Intent(this, ImageCrawler.class);
+            Intent intent = new Intent(this, ImageCrawlerActivity.class);
             intent.putExtra("locationName",locationName);
             startActivity(intent);
         } else if (id == R.id.nav_about) {
