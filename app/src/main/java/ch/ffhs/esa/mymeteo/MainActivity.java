@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity
     GoogleMap mGoogleMap;
     SupportMapFragment mFragment;
     Marker currLocationMarker;
+    String locationName = "";
 
     float testLat = 47;
     float testLon = 8.5f;
@@ -197,7 +198,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_einstellungen) {
 
         } else if (id == R.id.nav_hilfe) {
-
+            Intent intent = new Intent(this, ImageCrawler.class);
+            intent.putExtra("locationName",locationName);
+            startActivity(intent);
         } else if (id == R.id.nav_about) {
             Intent intent = new Intent(this, WebCam.class);
             startActivity(intent);
@@ -403,6 +406,7 @@ public class MainActivity extends AppCompatActivity
             add = add + "\n" + obj.getSubThoroughfare();
 
             String locality = obj.getLocality();
+            this.locationName = locality;
             String countryCode = obj.getCountryCode();
             localityCountry = locality + "," + countryCode;
 
