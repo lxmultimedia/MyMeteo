@@ -4,8 +4,15 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.LruCache;
+import android.view.MenuItem;
 import android.widget.GridView;
 
 import com.androidquery.AQuery;
@@ -23,7 +30,7 @@ import ch.ffhs.esa.mymeteo.imagecrawler.ImageAdapter;
 import ch.ffhs.esa.mymeteo.imagecrawler.ImageResult;
 
 
-public class ImageCrawlerActivity extends AppCompatActivity {
+public class ImageCrawlerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public final int MAX_RESULT_COUNT = 10;
     private final int PAGE_SIZE = 8;
@@ -38,6 +45,19 @@ public class ImageCrawlerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_crawler);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // Navigation
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
         resultsGrid = (GridView) findViewById(R.id.grid_view);
 
     }
@@ -48,6 +68,35 @@ public class ImageCrawlerActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String query = intent.getStringExtra("locationName");
         doSearch(query);
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.nav_home) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_suche) {
+
+        } else if (id == R.id.nav_favoriten) {
+
+        } else if (id == R.id.nav_topplaces) {
+
+        } else if (id == R.id.nav_einstellungen) {
+
+        } else if (id == R.id.nav_hilfe) {
+            Intent intent = new Intent(this, HilfeActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_about) {
+            Intent intent = new Intent(this, AboutActivity.class);
+            startActivity(intent);
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
     protected void asyncJson(String url, final int start, final ImageAdapter searchResultsAdapter){

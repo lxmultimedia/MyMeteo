@@ -3,26 +3,22 @@ package ch.ffhs.esa.mymeteo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
-import com.loopj.android.http.*;
+import android.webkit.WebView;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.view.Window;
-import android.view.WindowManager;
-import android.webkit.*;
-
-public class WebCam extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class WebCamActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +51,7 @@ public class WebCam extends AppCompatActivity implements NavigationView.OnNaviga
             public void onStart() {
                 //TextView _response = (TextView) findViewById(R.id.txtResponse);
                 //_response.setText("started");
-                System.out.println("WebCam Request started");
+                System.out.println("WebCamActivity Request started");
             }
 
             @Override
@@ -78,7 +74,7 @@ public class WebCam extends AppCompatActivity implements NavigationView.OnNaviga
                 }
 
                 //_response.setText(webcamurl);
-                System.out.println("WebCam Request successful");
+                System.out.println("WebCamActivity Request successful");
 
 
                 WebView webview = (WebView) findViewById(R.id.webcambrowser);
@@ -101,14 +97,14 @@ public class WebCam extends AppCompatActivity implements NavigationView.OnNaviga
                 }
                 //TextView _response = (TextView) findViewById(R.id.txtResponse);
                 //_response.setText(jsonObject.toString());
-                System.out.println("WebCam Request failed");
+                System.out.println("WebCamActivity Request failed");
             }
 
             @Override
             public void onRetry(int retryNo) {
                 //TextView _response = (TextView) findViewById(R.id.txtResponse);
                 //_response.setText(retryNo);
-                System.out.println("WebCam Request retry");
+                System.out.println("WebCamActivity Request retry");
             }
         });
     }
@@ -131,9 +127,10 @@ public class WebCam extends AppCompatActivity implements NavigationView.OnNaviga
         } else if (id == R.id.nav_einstellungen) {
 
         } else if (id == R.id.nav_hilfe) {
-
+            Intent intent = new Intent(this, HilfeActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_about) {
-            Intent intent = new Intent(this, WebCam.class);
+            Intent intent = new Intent(this, AboutActivity.class);
             startActivity(intent);
         }
 

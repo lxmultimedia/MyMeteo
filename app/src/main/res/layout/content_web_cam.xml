@@ -5,14 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="ch.ffhs.esa.mymeteo.WebCam"
+    tools:context="ch.ffhs.esa.mymeteo.WebCamActivity"
     tools:showIn="@layout/activity_web_cam">
 
     <WebView
         android:id="@+id/webcambrowser"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_margin="0dp"
         android:clipToPadding="true"
         android:fadeScrollbars="true"
         android:isScrollContainer="true"
@@ -23,7 +22,11 @@
         android:visibility="visible"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        tools:layout_editor_absoluteY="8dp">
+        tools:layout_editor_absoluteY="8dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
     </WebView>
 

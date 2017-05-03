@@ -22,7 +22,18 @@
     <!-- HOME -->
     <string name="textPosition">Aktuelle Position:</string>
 
-    <!-- WebCam -->
+    <!-- WebCamActivity -->
     <string name="title_activity_web_cam">WebCam</string>
+
+    <!-- ImageCrawler -->
+    <string name="title_activity_imagecrawler">Bilder</string>
+
+    <!-- hilfe -->
+    <string name="title_activity_hilfe">Hilfe</string>
+    <string name="hilfetext">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</string>
+
+    <!-- About -->
+    <string name="title_activity_about">About</string>
+    <string name="abouttext">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</string>
 
 </resources>

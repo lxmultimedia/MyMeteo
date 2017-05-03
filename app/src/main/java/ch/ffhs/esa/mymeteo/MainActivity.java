@@ -199,11 +199,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_einstellungen) {
 
         } else if (id == R.id.nav_hilfe) {
-            Intent intent = new Intent(this, ImageCrawlerActivity.class);
-            intent.putExtra("locationName",locationName);
+            Intent intent = new Intent(this, HilfeActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_about) {
-            Intent intent = new Intent(this, WebCam.class);
+            Intent intent = new Intent(this, AboutActivity.class);
             startActivity(intent);
         }
 

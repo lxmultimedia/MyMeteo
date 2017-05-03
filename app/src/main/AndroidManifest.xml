@@ -47,11 +47,28 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".WebCam"
+            android:name=".WebCamActivity"
             android:label="@string/title_activity_web_cam"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ImageCrawlerActivity"></activity>
+
+        <activity android:name=".ImageCrawlerActivity"
+            android:label="@string/title_activity_imagecrawler"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".HilfeActivity"
+            android:label="@string/title_activity_hilfe"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".AboutActivity"
+            android:label="@string/title_activity_about"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>

@@ -6,48 +6,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:orientation="vertical"
     tools:openDrawer="start">
 
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/mainLayoutRoot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        android:paddingBottom="0dp"
-        android:paddingLeft="0dp"
-        android:paddingRight="0dp"
-        android:paddingTop="0dp"
-        tools:context="ch.ffhs.esa.mymeteo.ImageCrawlerActivity">
+        tools:context="ch.ffhs.esa.mymeteo.HilfeActivity">
 
-        <android.support.design.widget.AppBarLayout
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay">
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/mr_dialog_material_background_dark"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@drawable/mr_dialog_material_background_dark"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-        </android.support.design.widget.AppBarLayout>
+    </android.support.design.widget.AppBarLayout>
 
 
-        <GridView
-            android:id="@+id/grid_view"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:columnWidth="90dp"
-            android:gravity="center"
-            android:layout_marginTop="70dp"
-            android:horizontalSpacing="10dp"
-            android:numColumns="auto_fit"
-            android:stretchMode="columnWidth"
-            android:verticalSpacing="10dp" />
+
+    <include
+        layout="@layout/content_hilfe"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
     </android.support.design.widget.CoordinatorLayout>
 
