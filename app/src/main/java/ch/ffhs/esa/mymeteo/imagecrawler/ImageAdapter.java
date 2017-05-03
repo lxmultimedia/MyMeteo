@@ -49,8 +49,17 @@ public class ImageAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
 
-        String imageUrl = results.get(results.keyAt(position));
+        final String imageUrl = results.get(results.keyAt(position));
         imageView.setImageBitmap(context.imageCache.get(imageUrl));
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                context.loadPhoto(imageView);
+
+            }
+        });
 
         return imageView;
     }

@@ -1,5 +1,6 @@
 package ch.ffhs.esa.mymeteo;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -9,11 +10,17 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.LruCache;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
@@ -99,6 +106,37 @@ public class ImageCrawlerActivity extends AppCompatActivity implements Navigatio
         return true;
     }
 
+    public void loadPhoto(ImageView imageView) {
+
+        ImageView tempImageView = imageView;
+
+
+        AlertDialog.Builder imageDialog = new AlertDialog.Builder(this);
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
+
+        View layout = inflater.inflate(R.layout.custom_fullimage_dialog,
+                (ViewGroup) findViewById(R.id.layout_root));
+        ImageView image = (ImageView) layout.findViewById(R.id.fullimage);
+
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        image.setLayoutParams(layoutParams);
+        image.setScaleType(ImageView.ScaleType.FIT_XY);
+
+        image.setImageDrawable(tempImageView.getDrawable());
+        imageDialog.setView(layout);
+        imageDialog.setPositiveButton("OK", new DialogInterface.OnClickListener(){
+
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+
+        });
+
+
+        imageDialog.create();
+        imageDialog.show();
+    }
+
     protected void asyncJson(String url, final int start, final ImageAdapter searchResultsAdapter){
 
         // TODO: Set cache to be big enough to handle 50 images at a time
@@ -132,7 +170,7 @@ public class ImageCrawlerActivity extends AppCompatActivity implements Navigatio
                         JSONArray results = json.getJSONArray("value");
                         for(int i=0; i<results.length(); i++){
                             final ImageResult imageResult = new ImageResult();
-                            imageResult.imgUrl = results.getJSONObject(i).getString("thumbnailUrl");
+                            imageResult.imgUrl = results.getJSONObject(i).getString("contentUrl");
                             imageResult.resultIndex = start + i;
 
                             if(imageResult.resultIndex >= 10){
