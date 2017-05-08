@@ -37,10 +37,12 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -49,11 +51,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-import ch.ffhs.esa.mymeteo.listContent.ForeCastContent;
 import ch.ffhs.esa.mymeteo.data.Channel;
 import ch.ffhs.esa.mymeteo.data.Day;
 import ch.ffhs.esa.mymeteo.data.ForeCast;
 import ch.ffhs.esa.mymeteo.data.Item;
+import ch.ffhs.esa.mymeteo.listContent.ForeCastContent;
 import ch.ffhs.esa.mymeteo.listContent.MyforecastDayRecyclerViewAdapter;
 import ch.ffhs.esa.mymeteo.service.WeatherServiceCallback;
 import ch.ffhs.esa.mymeteo.service.YahooWeatherService;
@@ -191,13 +193,17 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_suche) {
-
+            Intent intent = new Intent(this, SucheActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_favoriten) {
-
+            Intent intent = new Intent(this, SucheActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_topplaces) {
-
+            Intent intent = new Intent(this, SucheActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_einstellungen) {
-
+            Intent intent = new Intent(this, SucheActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_hilfe) {
             Intent intent = new Intent(this, HilfeActivity.class);
             startActivity(intent);
@@ -225,7 +231,7 @@ public class MainActivity extends AppCompatActivity
 
         buildGoogleApiClient();
 
-        //mGoogleApiClient.connect();
+        mGoogleApiClient.connect();
 
     }
 
@@ -254,7 +260,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     protected synchronized void buildGoogleApiClient() {
-        Toast.makeText(this, "buildGoogleApiClient", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "buildGoogleApiClient", Toast.LENGTH_SHORT).show();
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -292,7 +298,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onConnected(Bundle bundle) {
-        Toast.makeText(this, "onConnected", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "onConnected", Toast.LENGTH_SHORT).show();
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -307,15 +313,16 @@ public class MainActivity extends AppCompatActivity
                 mGoogleApiClient);
         if (mLastLocation != null) {
             //place marker at current position
-            //mGoogleMap.clear();
+            mGoogleMap.clear();
             latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(latLng);
-            markerOptions.title("Current Position");
+            markerOptions.title("Deine Position");
             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
             currLocationMarker = mGoogleMap.addMarker(markerOptions);
         }
 
+        /*
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(5000); //5 seconds
         mLocationRequest.setFastestInterval(3000); //3 seconds
@@ -323,7 +330,8 @@ public class MainActivity extends AppCompatActivity
         //mLocationRequest.setSmallestDisplacement(0.1F); //1/10 meter
 
         LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, (com.google.android.gms.location.LocationListener) this);
-
+        */
+        zoomToLocation();
     }
 
     @Override
@@ -347,14 +355,14 @@ public class MainActivity extends AppCompatActivity
         latLng = new LatLng(location.getLatitude(), location.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
-        markerOptions.title("Current Position");
+        markerOptions.title("Deine Position");
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
         currLocationMarker = mGoogleMap.addMarker(markerOptions);
 
         Toast.makeText(this, "Location Changed", Toast.LENGTH_SHORT).show();
 
         //zoom to current position:
-        //mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 1));
+        //zoomToLocation();
 
         //If you only need one location, unregister the listener
         //LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
@@ -370,15 +378,21 @@ public class MainActivity extends AppCompatActivity
         Marker newMarker;
         LatLng newLatLng = new LatLng(testLat, testLon);
 
-        // Add the marker at the clicked location, and add the next-available label
-        // from the array of alphabetical characters.
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(newLatLng);
         markerOptions.title("New Marker, Test");
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
         newMarker = mGoogleMap.addMarker(markerOptions);
-        //mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newLatLng, 11));
+    }
 
+    private void zoomToLocation() {
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(latLng)                   // Sets the center of the map to Mountain View
+                .zoom(10)                   // Sets the zoom
+                .bearing(0)                // Sets the orientation of the camera to east
+                .tilt(30)                   // Sets the tilt of the camera to 30 degrees
+                .build();                   // Creates a CameraPosition from the builder
+        mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 
 
@@ -419,7 +433,9 @@ public class MainActivity extends AppCompatActivity
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
+
         getWeatherForecast(localityCountry);
+
 
     }
 
