@@ -30,17 +30,29 @@
         android:layout_alignBottom="@+id/textPosition"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="18dp"
+        android:layout_toEndOf="@+id/textPosition"
+        android:paddingLeft="15dp"
         tools:text="..." />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="22dp"
-        android:layout_toStartOf="@+id/PositionWert"
+        android:onClick="goToSearch"
+        android:text="@string/btn_Home_Suche"
+        android:layout_alignBaseline="@+id/PositionWert"
+        android:layout_alignBottom="@+id/PositionWert"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:onClick="addMarker"
-        android:text="Marker Test" />
+        android:text="Marker Test"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="51dp" />
 
     <TextView
         android:id="@+id/textPosition"

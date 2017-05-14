@@ -330,8 +330,10 @@ public class MainActivity extends AppCompatActivity
         //mLocationRequest.setSmallestDisplacement(0.1F); //1/10 meter
 
         LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, (com.google.android.gms.location.LocationListener) this);
+
         */
         zoomToLocation();
+
     }
 
     @Override
@@ -384,6 +386,13 @@ public class MainActivity extends AppCompatActivity
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
         newMarker = mGoogleMap.addMarker(markerOptions);
     }
+
+    // -> Activity Suche
+    public void goToSearch(View v) {
+        Intent intent = new Intent(this, SucheActivity.class);
+        startActivity(intent);
+    }
+
 
     private void zoomToLocation() {
         CameraPosition cameraPosition = new CameraPosition.Builder()
