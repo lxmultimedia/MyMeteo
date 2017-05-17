@@ -71,6 +71,16 @@
             android:label="@string/title_activity_suche"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SBBActivity"
+            android:label="@string/title_activity_sbb"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".FlugActivity"
+            android:label="@string/title_activity_flug"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

@@ -40,4 +40,10 @@
     <string name="abouttext">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</string>
     <string name="btn_Home_Suche">Suche starten</string>
 
+    <!-- SBB -->
+    <string name="title_activity_sbb">Zugverbindungen</string>
+
+    <!-- Flug -->
+    <string name="title_activity_flug">Flugverbindungen</string>
+
 </resources>
