@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onMapReady(GoogleMap gMap) {
+    public void onMapReady(GoogleMap gMap) throws SecurityException {
         mGoogleMap = gMap;
 
         mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
@@ -369,8 +369,6 @@ public class MainActivity extends AppCompatActivity
         //Toast.makeText(this, "Location Changed", Toast.LENGTH_SHORT).show();
 
         zoomToLocation();
-
-
     }
 
     // Adds a marker to the map.
