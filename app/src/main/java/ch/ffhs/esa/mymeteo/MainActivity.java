@@ -9,7 +9,6 @@ import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -45,6 +44,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
@@ -322,16 +322,21 @@ public class MainActivity extends AppCompatActivity
             currLocationMarker = mGoogleMap.addMarker(markerOptions);
         }
 
-        /*
+
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(5000); //5 seconds
         mLocationRequest.setFastestInterval(3000); //3 seconds
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-        //mLocationRequest.setSmallestDisplacement(0.1F); //1/10 meter
+        float displacement = 0.1F;
+        mLocationRequest.setSmallestDisplacement(displacement);//1/10 meter
 
-        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, (com.google.android.gms.location.LocationListener) this);
+        try
+        {
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+        } catch (Exception ex) {
+            Log.d("error", ex.getMessage());
+        }
 
-        */
         zoomToLocation();
 
     }
@@ -361,13 +366,10 @@ public class MainActivity extends AppCompatActivity
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
         currLocationMarker = mGoogleMap.addMarker(markerOptions);
 
-        Toast.makeText(this, "Location Changed", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Location Changed", Toast.LENGTH_SHORT).show();
 
-        //zoom to current position:
-        //zoomToLocation();
+        zoomToLocation();
 
-        //If you only need one location, unregister the listener
-        //LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
 
     }
 
@@ -458,23 +460,6 @@ public class MainActivity extends AppCompatActivity
         service.refreshWeather(localityCountry);
 
     }
-
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-
-    }
-
 
     @Override
     public void serviceSuccess(Channel channel) {
