@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="ch.ffhs.esa.mymeteo.SBBActivity"
-    tools:showIn="@layout/activity_sbb">
+    tools:context="ch.ffhs.esa.mymeteo.RouteActivity"
+    tools:showIn="@layout/activity_route">
 
     <WebView
-        android:id="@+id/webcambrowsersbb"
+        android:id="@+id/webcambrowserroute"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:clipToPadding="true"

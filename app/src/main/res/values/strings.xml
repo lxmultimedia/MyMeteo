@@ -46,4 +46,7 @@
     <!-- Flug -->
     <string name="title_activity_flug">Flugverbindungen</string>
 
+    <!-- Routenplanung -->
+    <string name="title_activity_route">Routenplanung</string>
+
 </resources>

@@ -10,14 +10,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
+import android.webkit.WebView;
 
-public class HilfeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class RouteActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hilfe);
+        setContentView(R.layout.activity_route);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -32,7 +32,30 @@ public class HilfeActivity extends AppCompatActivity implements NavigationView.O
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        setBrowser();
+
     }
+
+
+    private void setBrowser() {
+
+        String locationFrom = "Zürich";
+        String locationTo = "Bern";
+
+        String url = "https://maps.google.ch/?saddr="+locationFrom+"&daddr="+locationTo+"&z=15&om=1";
+
+
+        WebView webview = (WebView) findViewById(R.id.webcambrowserroute);
+        webview.setInitialScale(1);
+        webview.getSettings().setJavaScriptEnabled(true);
+        webview.getSettings().setLoadWithOverviewMode(true);
+        webview.getSettings().setUseWideViewPort(true);
+        webview.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+        webview.setScrollbarFadingEnabled(false);
+        webview.loadUrl(url);
+
+    }
+
 
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -62,37 +85,5 @@ public class HilfeActivity extends AppCompatActivity implements NavigationView.O
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public void startWebCam(View v) {
-        Intent intent = new Intent(this, WebCamActivity.class);
-        startActivity(intent);
-    }
-
-    public void startImageCrawler(View v) {
-        Intent intent = new Intent(this, ImageCrawlerActivity.class);
-        intent.putExtra("locationName","Zurich,ch");
-        startActivity(intent);
-    }
-
-    public void startSBB(View v) {
-        Intent intent = new Intent(this, SBBActivity.class);
-        //intent.putExtra("locationFrom","Zurich");
-        //intent.putExtra("locationFrom","Roma");
-        startActivity(intent);
-    }
-
-    public void startFlug(View v) {
-        Intent intent = new Intent(this, FlugActivity.class);
-        //intent.putExtra("latFrom","XY");
-        //intent.putExtra("longFrom","XY");
-        //intent.putExtra("latTo","XY");
-        //intent.putExtra("longTo","XY");
-        startActivity(intent);
-    }
-
-    public void Route(View v) {
-        Intent intent = new Intent(this, RouteActivity.class);
-        startActivity(intent);
     }
 }
