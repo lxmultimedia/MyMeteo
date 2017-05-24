@@ -23,9 +23,14 @@ android {
             shrinkResources true
         }
     }
+    aaptOptions {
+        noCompress "csv"
+    }
     productFlavors {
     }
+    sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] } }
 }
+
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -41,6 +46,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.loopj.android:android-async-http:1.4.9'
     compile 'com.android.support:recyclerview-v7:25.3.1'
-    compile group: 'com.googlecode.android-query', name: 'android-query', version: '0.25.9'
+    compile 'com.googlecode.android-query:android-query:0.25.9'
     testCompile 'junit:junit:4.12'
+    compile files('libs/opencsv-3.9.jar')
 }
